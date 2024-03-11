@@ -20,7 +20,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ variant, handleDismiss, children, id }) {
+function Toast({ variant, children, id }) {
 
   const Icon = ICONS_BY_VARIANT[variant];  // capitalized!
   const { dismissToast } = React.useContext(ToastContext);
@@ -31,11 +31,11 @@ function Toast({ variant, handleDismiss, children, id }) {
         <Icon size={24}></Icon>
       </div>
       <p className={styles.content}>
+        <VisuallyHidden>{ variant }</VisuallyHidden>
         { children }
       </p>
-      <button className={styles.closeButton} onClick={() => dismissToast(id)}>
+      <button className={styles.closeButton} onClick={() => dismissToast(id)} aria-label='Dismiss message' aria-live='off'>
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
